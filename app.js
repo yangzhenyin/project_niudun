@@ -66,5 +66,5 @@ app.use('/course', course);
 
 // 绑定端口号开启服务器
 app.listen(3000, function() {
-    console.log('server is running...');
+    console.log('running...');
 });
