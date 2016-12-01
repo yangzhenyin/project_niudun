@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>学IT - 后台管理系统</title>
+	<!-- 所有的路径都改成相对于当前根目录的路径 -->
+	<link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="/assets/nprogress/nprogress.css">
+	<link rel="stylesheet" href="/less/index.css">
+</head>
+<body>
+	<!-- 留标记 -->
+	<!-- 侧边栏 -->
+	{{{block ('aside')}}}
+
+	<!-- 公共主体 -->
+	{{{block ('main')}}}
+	
+	<!-- 登录 -->
+	{{{block ('plain')}}}
+
+	<!-- 模态框的位置 -->
+	{{{block ('template')}}}
+	<!-- 引入暴露的资源的模块化 sea.js -->
+	<script src="/libs/sea.js"></script>
+
+	<!-- 留一个标记，用于加载 js 代码，讲师管理有关的代码 -->
+	{{{block ('script')}}}
+
+	<script>
+		// 配置依赖的模块的路径
+		seajs.config({
+			base: '/assets',//到时候 base 这个路径会自动拼接到 jquery 代表的路径上
+			alias: {
+				jquery: 'jquery/jquery.js'
+			}
+		});
+		// 加载依赖的模块
+		// '/' 代表根目录 public 或者 uploads
+		seajs.use('/scripts/common');//后缀名 js 可以省略
+	</script>
+</body>
+</html>
