@@ -48,12 +48,12 @@ router.get('/edit/:tc_id', function(req, res) {
         //渲染跟添加讲师有关的页面
         res.render('teachers/add', {
             // 留一个空对象，用于添加数据
-
+            teacher: result[0]
         });
     });
 });
 
-// 根据 /teacher/add 路径 和 post 请求方式，进行操作数据库的操作
+// 根据 /teacher/add 路径 和 post 请求方式，进行往数据库中添加讲师数据的操作，添加讲师的操作
 router.post('/add', function(req, res) {
     // 进行数据库操作
     // 引用往数据库中添加老师信息的方法
@@ -75,6 +75,38 @@ router.post('/add', function(req, res) {
             result: {}
         });
 
+    });
+});
+
+// 编辑讲师 post 请求和 /edit 路径，更新编辑后的讲师数据
+router.post('/edit', function(req, res) {
+    // 调用编辑讲师数据库的方法更新对应的编辑后的讲师的资料
+    tcModel.edit(req.body, function(err, result) {
+        // 判断是否有异常
+        if (err) {
+            throw err;
+        }
+        res.json({
+            code: 10000,
+            msg: '添加成功了！',
+            result: {}
+        });
+    });
+});
+
+// 根据 post 请求，和 /teacher/preview 路径（接口），从数据中取出对应的 id 的教师的数据，然后响应给前端
+// 设置路由
+router.post('/preview', function(req, res) {
+    // 从请求的数据中获取要查询的对应的 id 的讲师
+    var tc_id = req.body.tc_id;
+    //调用操作数据的方法，根据id，查找对应的老师的数据
+    tcModel.find(tc_id, function(err, result) {
+        // 判断操作数据库的时候是否发生异常
+        if (err) {
+            throw err;
+        }
+        // 响应给前端
+        res.json(result[0]);
     });
 });
 

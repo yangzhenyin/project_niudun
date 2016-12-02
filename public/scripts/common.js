@@ -2,6 +2,9 @@
 define(function (require, exports, module) {
     // 加载依赖的模块
     var $ = require('jquery'); //这里的 jquery 是配置好的路径
+
+    // 引入进度条的插件
+    var NProgress = require('nprogress');
     // 折叠，显示和隐藏
     // 给 .navs 下的 ul 前面为a 标签的绑定点击事件
     $('.navs ul').prev('a').on('click', function () {
@@ -26,6 +29,10 @@ define(function (require, exports, module) {
             return false;
         }
     });
+
+    // 进度条的开始和加载完成结束
+    NProgress.start();
+    NProgress.done();
     /*$('.navs a').each( function() {
         // 获取当前的请求路径
         var pathname = location.pathname;

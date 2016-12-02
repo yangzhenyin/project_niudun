@@ -41,3 +41,10 @@
 		</div>
 	</div>
 {{/block}}
+
+<!-- 在渲染页面的时候就执行一下这个语句 -->
+<!-- {{#block ('script')}}
+	<script>
+		seajs.use();
+	</script>
+{{/block}} -->

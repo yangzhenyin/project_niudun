@@ -1,5 +1,5 @@
 
-// 配置文件
+// 配置路径的文件
 seajs.config({
 	base: './assets',
 	alias: {

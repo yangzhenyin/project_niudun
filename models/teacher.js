@@ -30,3 +30,11 @@ module.exports.find = function(tc_id, callback) {
     db.query('SELECT * FROM `teacher` WHERE tc_id = ' + tc_id, callback);
 };
 
+// 根据 id 编辑对应 id 的讲师
+module.exports.edit = function(body, callback) {
+    var tc_id = body.tc_id;
+    // 删除 body 里面的 id，因为数据库中的 id 是主键，会自增
+    delete body.tc_id;
+    db.query('UPDATE `teacher` SET ? WHERE `tc_id` = ' + tc_id, body, callback);
+};
+
