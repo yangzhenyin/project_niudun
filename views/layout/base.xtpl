@@ -33,7 +33,8 @@
 		seajs.config({
 			base: '/assets',//到时候 base 这个路径会自动拼接到 jquery 代表的路径上
 			alias: {
-				jquery: 'jquery/jquery.js'
+				jquery: 'jquery/jquery.js',
+				bootstrap: 'bootstrap/js/bootstrap.js'
 			}
 		});
 		// 加载依赖的模块

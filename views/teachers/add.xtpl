@@ -63,6 +63,6 @@
 {{#block ('script')}}
 	<script>
 		// 使用 js 代码块
-		seajs.use('/scripts/add');
+		seajs.use('/scripts/teachers/add');
 	</script>
 {{/block}}

@@ -35,6 +35,24 @@ router.get('/add', function(req, res) {
     });
 });
 
+// 根据 /teacher/add:tc_id 路径，查询数据库，用于渲染编辑教师的页面
+router.get('/edit/:tc_id', function(req, res) {
+    // 引用查询数据库的方法，从数据库中查找对应 tc_id 的教师信息
+    // 获取要查看的当前教师信息的 tc_id 
+    var tc_id = req.params.tc_id;
+    tcModel.find(tc_id, function(err, result) {
+        // 判断是否发生异常
+        if (err) {
+            throw err;
+        }
+        //渲染跟添加讲师有关的页面
+        res.render('teachers/add', {
+            // 留一个空对象，用于添加数据
+
+        });
+    });
+});
+
 // 根据 /teacher/add 路径 和 post 请求方式，进行操作数据库的操作
 router.post('/add', function(req, res) {
     // 进行数据库操作
