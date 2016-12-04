@@ -38,3 +38,24 @@ module.exports.edit = function(body, callback) {
     db.query('UPDATE `teacher` SET ? WHERE `tc_id` = ' + tc_id, body, callback);
 };
 
+// 根据传过来的数据中的用户名和密码。跟数据库中的用户名和密码进行对比
+module.exports.authored = function(body, callback) {
+    // 把用户名和密码取出来
+    var tc_name = body.tc_name;
+    var tc_pass = body.tc_pass;
+    // 根据条件进行对比
+    var query = 'SELECT * FROM `teacher` WHERE `tc_name`="'+tc_name+'" AND `tc_pass`="' + tc_pass + '"';
+    db.query(query, callback);
+};
+
+// 完善讲师资料
+module.exports.update = function(body, callback) {
+    // 获取到要完善的讲师的 id
+    var tc_id = body.tc_id;
+    // 因为 tc_id 在数据库中是主键，不能够修改，因此在这只是当做一个查询条件
+    delete body.tc_id;
+    var query = 'UPDATE `teacher` SET ? WHERE `tc_id` =' + tc_id;
+    //去数据库中更新完善数据
+    db.query(query, body, callback);
+};
+

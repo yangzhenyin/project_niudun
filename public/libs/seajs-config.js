@@ -9,7 +9,8 @@ seajs.config({
         datepicker: 'bootstrap-datepicker/js/bootstrap-datepicker',//引入bootstrap添加时间的插件
         language: 'bootstrap-datepicker/js/bootstrap-datepicker.zh-CN.min.js',//事件插件的中文
         template: 'artTemplate/template-native.js',//原生版artTemplate
-        nprogress: 'nprogress/nprogress.js'//进度条
+        nprogress: 'nprogress/nprogress.js',//进度条
+        ckeditor: 'ckeditor/ckeditor.js'//文本编辑器
     },
     // 实现全局加载，要想执行，但是要在后面执行以下 use 一下
     preload: ['/scripts/common', 'bootstrap']
