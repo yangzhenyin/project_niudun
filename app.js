@@ -28,7 +28,8 @@ app.use(cookieParser());
 // 会在请求 req 上 加一个 session 属性
 app.use(session({
     secret: 'keyboard cat',
-    resave: false
+    resave: false,
+    cookie: {maxAge: 60 * 60 * 24}//设置 cookie 的生命周期，是以秒为单位的
 }));
 
 // 解析 application/x-www-form-urlencoded 

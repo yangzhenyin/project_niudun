@@ -7,10 +7,12 @@ seajs.config({
         form: 'jquery-form/jquery.form.js',//发送 ajax 请求的插件
         bootstrap: 'bootstrap/js/bootstrap.js',//整体样式
         datepicker: 'bootstrap-datepicker/js/bootstrap-datepicker',//引入bootstrap添加时间的插件
-        language: 'bootstrap-datepicker/js/bootstrap-datepicker.zh-CN.min.js',//事件插件的中文
+        language: 'bootstrap-datepicker/js/bootstrap-datepicker.zh-CN.min.js',//时间插件的中文
         template: 'artTemplate/template-native.js',//原生版artTemplate
         nprogress: 'nprogress/nprogress.js',//进度条
-        ckeditor: 'ckeditor/ckeditor.js'//文本编辑器
+        ckeditor: 'ckeditor/ckeditor.js',//文本编辑器
+        region: 'jquery-region/jquery.region.js',//省市县三级联动
+        uploadify: 'uploadify/jquery.uploadify.js'//上传文件的插件
     },
     // 实现全局加载，要想执行，但是要在后面执行以下 use 一下
     preload: ['/scripts/common', 'bootstrap']

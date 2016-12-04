@@ -5,6 +5,47 @@ var express = require('express');
 // 引入操作数据库的方法
 var tcModel = require('../models/teacher');
 
+// 加载省市县三级联动的数据
+var region = require('../models/region.json');
+
+// 引入操作路径的核心模块
+var path = require('path');
+
+// 这里的 __dirname 路径是到当前的目录下
+var rootPath = path.join(__dirname, '../');
+
+// 引入上传文件的核心模块
+var multer = require('multer');
+
+// 自定义设置上传图片保存的路径
+var storage = multer.diskStorage({
+    // 自定义文件存储路径
+    destination: function(req, file, cb) {
+        // 这里指定的是文件存储的自定义路径
+        cb(null, rootPath + 'uploads/avatars');
+    },
+    filename: function(req, file, cb) {//存储成功后执行的回调函数
+        // 这里指定的是文件存储时的名字
+        // 新名字 = 原始名 + 时间戳 + 后缀名
+        // 获取上传文件的名字
+        var originalname = file.originalname;
+        // 获取后缀名与前面正常名字的分隔符  '.' 的索引
+        var lastIndex = originalname.lastIndexOf('.');
+        // 获取原始名分隔符前面的部分
+        var filename = originalname.slice(0, lastIndex);
+        // 获取原始名后面的后缀名
+        var fileExt = originalname.slice(lastIndex);//从 '.' 截取到最后面
+        // Date.now()是一个时间戳，用于保证每一个上传文件的名字的不同
+        // 使用自己拼接好的名字
+        cb(null, filename + '-' + Date.now() + fileExt);
+    }
+});
+
+// 上传的头像的存储路径
+// 使用自定义的存储文件路径
+var upload = multer({storage: storage});
+//var upload = multer({dest: rootPath + '/uploads/avatars'});
+
 // 创建子路由
 var router = express.Router();
 
@@ -61,5 +102,32 @@ router.get('/repass', function(req, res) {
     res.render('dashboard/repass', {
         // 留空，用于数据添加
         
+    });
+});
+
+// 请求省市县三级联动的数据
+router.get('/region', function(req, res) {
+    // 把请求的数据响应回去    
+    res.json(region);
+});
+
+// 上传文件的子路由
+router.post('/upfile', upload.single('tc_avatar'), function(req, res) {
+    // 获取传过来的数据
+    // 只获取上传头像的 用户id 和 头像文件名
+    var body = {
+        tc_id: req.session.loginfo.tc_id,
+        tc_avatar: req.file.filename
+    };
+    // body-parser中间件会把 post 提交的表单数据挂载到 req.body 上
+    // 调用操作数据库的方法，把头像的名字存储到数据库中
+    tcModel.update(body, function(err, result) {
+        // 判断操作数据库是否有异常
+        if (err) {
+            throw err;
+        }
+        // 成功了，就响应给前端
+        // 把上传的文件的信息数据返回给前端
+        res.json(req.file);
     });
 });

@@ -6,7 +6,7 @@
 	<div class="login">
 		<div class="login-wrap">
 			<div class="avatar">
-				<img src="/monkey.png" class="img-circle" alt="">
+				<img src="{{#if (loginfo.tc_avatar)}} /avatars/{{loginfo.tc_avatar}} {{else}} monkey.png{{/if}}" class="img-circle" alt="">
 			</div>
 			<form id="login" class="col-md-offset-1 col-md-10">
 				<div class="input-group input-group-lg">
